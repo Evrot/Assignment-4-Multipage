@@ -1,0 +1,84 @@
+/* ProductCard.css */
+
+/* Card container */
+.product-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+  margin-top: 20px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  width: 300px; /* optional fixed width */
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Card header */
+.card-header {
+  padding: 15px;
+  text-align: center; /* center content inside the card */
+}
+
+/* Product Image */
+.product-image {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+/* Product Name */
+.productname {
+  font-size: 1.2rem;
+  margin: 10px 0 5px 0;
+  color: #222;
+}
+
+/* Product Description */
+.productdescription {
+  font-size: 0.95rem;
+  color: #555;
+  display: block; /* ensures it appears on its own line */
+  margin-bottom: 8px;
+}
+
+/* Product Price */
+.productprice {
+  font-weight: bold;
+  color: #11384e; 
+  font-size: 1.1rem;
+  display: block; /* ensures it appears on its own line */
+}
+
+.productbutton {
+  font-weight: bold;
+  color: #eff2f4; 
+  font-size: 1rem;  
+  background-color:#11384e ; 
+}
+
+.productbutton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3); 
+  background: linear-gradient(135deg, #feb236, #6b5b95); 
+}
+
+/* Button click pop animation */
+.productbutton:active {
+  animation: buttonPop 0.2s ease;
+}
+
+@keyframes buttonPop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15); /* grows a bit */
+  }
+  100% {
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,67 @@
+/* Cart item container */
+.cart-item {
+  display: flex;
+  justify-content: space-between; /* name & price on left, button on right */
+  align-items: center;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background-color: #1f2933; /* dark footer/header style */
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+/* Hover effect for the entire item */
+.cart-item:hover {
+  transform: translateY(-2px);
+  background-color: #273343; /* slightly lighter on hover */
+}
+
+/* Product name */
+.cart-item h3 {
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Product price */
+.cart-item span {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #feb236; /* accent color for price */
+  margin-left: 10px;
+}
+
+/* Remove button */
+.remove-button {
+  background-color: transparent;
+  border: 1px solid #feb236;
+  color: #feb236;
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Hover effect for remove button */
+.remove-button:hover {
+  background-color: #feb236;
+  color: #1f2933;
+  transform: scale(1.05);
+}
+
+
+@media (max-width: 500px) {
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .remove-button {
+    align-self: flex-end;
+  }
+}

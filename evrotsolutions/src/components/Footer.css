@@ -1,0 +1,81 @@
+.footer {
+  background-color: #1f2933;
+  color: #ffffff;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  padding: 40px 20px;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.3);
+  font-family: Arial, sans-serif;
+
+  position: relative; /* Needed for absolute-positioned buttons */
+}
+
+/* Centered content */
+.footer .footer-info {
+  max-width: 60%;
+  margin: 0 auto;        /* Center horizontally */
+  text-align: center;    /* Center text */
+}
+
+/* Footer heading */
+.footer h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+/* Footer paragraphs */
+.footer p {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+/* Right-side buttons */
+.footer .footer-buttons {
+  position: absolute;
+  top: 40px;
+  right: 20px;
+
+  display: flex;
+  flex-direction: column; /* Stack vertically */
+  gap: 10px;
+}
+
+/* Buttons styled like links */
+.footer button {
+  background-color: transparent;
+  color: #f2f3f6;
+  border: none;
+
+  padding-right: 40px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-align: center;
+
+  transition: color 0.3s;
+}
+
+.footer button:hover {
+  color: #2563eb;
+}
+
+/* Responsive layout */
+@media (max-width: 600px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer .footer-info {
+    max-width: 100%;
+  }
+
+  .footer .footer-buttons {
+    position: static;     /* Reset absolute positioning */
+    flex-direction: row;  /* Buttons side-by-side */
+    margin-top: 20px;
+  }
+}
