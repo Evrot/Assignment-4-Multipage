@@ -1,8 +1,6 @@
-import ProductCard from './components/ProductCard.jsx';
 import Header from './components/Header.jsx';
 import './App.css';
-import Hero from './components/Hero.jsx';
-import heroBImage from "./assets/hero_image2.png";
+
 import cardImageone from "./assets/aetherion.jpg";
 import cardImagetwo from "./assets/cryostea.jpg";
 import cardImagethree from "./assets/pyronox.jpg";
@@ -11,32 +9,43 @@ import cardImagefive from "./assets/nebulon.jpg";
 import cardImagesix from "./assets/obsidara.jpg";
 import Footer from './components/Footer.jsx';
 import CartItem from './components/CartItem.jsx';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './components/CartModal.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import ProductsPage from "./pages/ProductsPage";
+import CartPage from "./pages/CartPage";
+
+
 
 // App.jsx
 function App() {
 
   // Cart
-  const [cart, setCart] = useState([]);
+ const [cart, setCart] = useState(() => {
+  const savedCart = localStorage.getItem("cart");
+  return savedCart ? JSON.parse(savedCart) : [];
+});
+
+useEffect(() => {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}, [cart]);
 
   // Add an Item
   const addsToCart = (product) => {
     setCart([...cart, product]);
   }
 
-  // Cart state
-  const [isCartOpen, setIsCartOpen] = useState(false);
-
+ 
   // Converting to use reduce()
   const parsePrice = (priceString) => {  
     return parseFloat(priceString.replace("$", "").replace(/\./g, "").replace(",", "."));
   };
 
   // Delete an Item
-  const removeFromCart = (product) => {
-    setCart(cart.filter(item => item.id !== product.id));
-  };
+ const removeFromCart = (indexToRemove) => {
+  setCart(cart.filter((_, index) => index !== indexToRemove));
+};
 
   // List of products
   const products = [
@@ -92,6 +101,7 @@ function App() {
 ];
 
   return (
+  <BrowserRouter>
     <div className="app">
       <Header
           headerName="Space Store"
@@ -101,73 +111,30 @@ function App() {
           headerFourthElement="Contact"
           cartLength={cart.length}
           toggleCart={() => setIsCartOpen(!isCartOpen)}
+          />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+
+        <Route
+          path="/products"
+          element={
+            <ProductsPage
+              products={products}
+              addToCart={addsToCart}
+            />
+          }
         />
-      <Hero
-          heroTitle="Welcome to Space"
-          heroSlogan="This is the place where you will have experiences from another world!"
-          heroImage={heroBImage}
-          heroButton="Travel Now!"
+
+        <Route
+          path="/cart"
+          element={
+            <CartPage
+              products={cart}
+              removeFromCart={removeFromCart}
+            />
+          }
         />
-      <main className="container">
-        <h2>Packages Available</h2>
-        <div className='cards'>
-          {products.map((product) => (
-            <ProductCard
-            key={product.id}
-            productName={product.productName}
-            productImage={product.productImage}
-            productPrice={product.productPrice}
-            productDescription={product.productDescription}
-            productButton={() => addsToCart(product)}
-            />            
-          ))}        
-        </div>
-
-        <div className="cart-items">
-          {(
-            cart.map((item, index) => (
-              <CartItem
-                key={index}
-                productName={item.productName}
-                productPrice={item.productPrice}
-                removeButton="Remove"
-                onRemove={() => removeFromCart(item)}
-              />
-            ))
-          )}
-      </div>
-      </main>
-
-      {isCartOpen && (
-          <div className="cart-modal-overlay" onClick={() => setIsCartOpen(false)}>
-            <div className="cart-modal" onClick={(e) => e.stopPropagation()}>
-              <h2>Shopping Cart</h2>
-              {cart.length === 0 ? (
-                <p>Your cart is empty!</p>
-              ) : (
-                <>
-                  {cart.map((item, index) => (
-                    <CartItem
-                      key={index}
-                      productName={item.productName}
-                      productPrice={item.productPrice}
-                      removeButton="Remove"
-                      onRemove={() => removeFromCart(item)}
-                    />
-                  ))}                  
-                  <h3>
-                    Total: $
-                    {cart
-                      .reduce((sum, item) => sum + parsePrice(item.productPrice), 0)
-                      .toLocaleString("en-US", { minimumFractionDigits: 2 })}
-                  </h3>
-                </>
-              )}
-              <button onClick={() => setIsCartOpen(false)}>Close</button>
-            </div>
-          </div>
-        )}
-
+      </Routes>
       <Footer
          footerTitle="Space Store"
          footerEmail="Email: spacestore@nasa.com"
@@ -177,8 +144,9 @@ function App() {
          footerButtonTwo="Contact"
          footerButtonThree="Privacy Policy"
          footerButtonFour="Terms of Service"
-      />
+         />
     </div>
+  </BrowserRouter>    
   );
 }
 

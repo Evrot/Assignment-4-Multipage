@@ -1,38 +1,35 @@
 .hero {
   position: relative;
-  min-height: 80vh;
-
+  min-height: 100vh; /* full viewport height */
   display: flex;
-  align-items: center;
+  flex-direction: column; /* allow content to stack */
   justify-content: center;
-
+  align-items: center;
   padding: 2rem;
   overflow: hidden;
-
-  background-color: #0f172a; /* fallback */
+  background-color: #0f172a;
   color: #ffffff;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Background image */
 .hero-bg {
   position: absolute;
   inset: 0;
-
   width: 100%;
   height: 100%;
-  object-fit: cover;
-
+  object-fit: cover; /* stretch image fully */
   z-index: 1;
-  opacity: 0.4;
+  opacity: 0.6; /* slightly darker overlay */
 }
 
-/* Content on top of image */
 .hero-content {
   position: relative;
   z-index: 2;
-
-  max-width: 700px;
+  max-width: 900px;
   text-align: center;
+  width: 100%;
+  padding: 0 1rem;
 }
 
 .hero-content h1 {
@@ -48,23 +45,61 @@
   color: #e5e7eb;
 }
 
-.hero-content button {
+.hero-button {
+  display: inline-block;
   padding: 0.75rem 2rem;
-
   font-size: 1rem;
   font-weight: 600;
-
   color: #0f172a;
   background-color: #ffffff;
-
   border: none;
   border-radius: 9999px;
   cursor: pointer;
-
+  text-decoration: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.hero-content button:hover {
+.hero-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* home-intro inside hero */
+.home-intro {
+  margin-top: 2rem;
+  color: #e5e7eb;
+}
+
+.home-intro h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.home-intro p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .hero {
+    min-height: 80vh;
+    padding: 1rem;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+
+  .hero-content p,
+  .home-intro p {
+    font-size: 1rem;
+  }
+
+  .hero-button {
+    padding: 0.5rem 1.5rem;
+    font-size: 0.9rem;
+  }
 }
