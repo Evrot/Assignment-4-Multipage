@@ -7,8 +7,7 @@ function Header({
   headerName,
   headerFirstElement,
   headerSecondElement,
-  headerThirdElement,
-  headerFourthElement,
+  headerThirdElement,  
   cartLength
 }) {
   return (
@@ -17,7 +16,8 @@ function Header({
 
       <nav>
         <Link to="/">{headerFirstElement}</Link>
-        <Link to="/products">{headerSecondElement}</Link>        
+        <Link to="/products">{headerSecondElement}</Link>
+        <Link to="/cart">{headerThirdElement}</Link>         
       </nav>
 
       <Link to="/cart" className="cart-container">

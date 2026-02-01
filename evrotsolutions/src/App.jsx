@@ -107,8 +107,7 @@ useEffect(() => {
           headerName="Space Store"
           headerFirstElement="Home"
           headerSecondElement="Products"
-          headerThirdElement="About"
-          headerFourthElement="Contact"
+          headerThirdElement="Cart"          
           cartLength={cart.length}
           toggleCart={() => setIsCartOpen(!isCartOpen)}
           />
